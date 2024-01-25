@@ -29,3 +29,18 @@ variable "worker_type" {
 variable "worker_volume_size" {
   default = 100
 }
+
+variable "additional_ingress_sg_rules" {
+  description = "Additional security group ingress rules to attach to the worker nodes"
+  type = list(object({
+    from_port        = string
+    to_port          = string
+    protocol         = string
+    cidr_blocks      = list(string)
+    ipv6_cidr_blocks = list(string)
+    prefix_list_ids  = list(string)
+    self             = bool
+    description      = string
+  }))
+  default = []
+}
